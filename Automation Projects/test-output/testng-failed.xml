@@ -8,11 +8,11 @@
           <include name="testFive"/>
         </methods>
       </class> <!-- intro.IterateWindows -->
-      <class name="intro.EcommercePurchase">
+      <class name="intro.FlightPicker">
         <methods>
-          <include name="testOne"/>
+          <include name="testThree"/>
         </methods>
-      </class> <!-- intro.EcommercePurchase -->
+      </class> <!-- intro.FlightPicker -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Summary] -->

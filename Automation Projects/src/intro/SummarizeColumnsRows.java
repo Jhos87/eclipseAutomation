@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
@@ -19,6 +20,7 @@ import HelperResources.ConfigReader;
 
 public class SummarizeColumnsRows extends ConfigReader {
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public static void testSeven() {
 		// TODO Auto-generated method
@@ -26,7 +28,10 @@ public class SummarizeColumnsRows extends ConfigReader {
 		Properties prop = loadFile();
 		System.setProperty("webdriver.firefox.driver", prop.getProperty("driver.ff"));
 		
-		WebDriver driver = new FirefoxDriver();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setHeadless(true);
+		WebDriver driver = new FirefoxDriver(options);
+		
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.get(prop.getProperty("url.summarize"));
 		

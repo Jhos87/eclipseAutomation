@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -23,12 +24,15 @@ public class EcommercePurchase extends ConfigReader {
         testOne();
     }
     
+	@SuppressWarnings("deprecation")
 	@Test
 	private static void testOne() {
 		Properties prop = loadFile();
 		System.setProperty("webdriver.firefox.driver", prop.getProperty("driver.ff"));
 		
-		WebDriver driver = new FirefoxDriver();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setHeadless(true);
+		WebDriver driver = new FirefoxDriver(options);
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.get(prop.getProperty("url.ecommPurchase"));
 		
