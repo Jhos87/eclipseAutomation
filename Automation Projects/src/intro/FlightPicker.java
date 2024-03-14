@@ -2,29 +2,39 @@ package intro;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
-public class FlightPicker {
+import HelperResources.ConfigReader;
 
-	public static void main(String[] args) throws InterruptedException {
+public class FlightPicker extends ConfigReader{
+
+	@Test
+	public static void testThree() {
 		// TODO Auto-generated method stub
 
-		System.setProperty("webdriver.firefox.driver",
-				"C:\\Users\\Jhos\\Downloads\\geckodriver-v0.33.0-win-aarch64\\geckodriver.exec");
-
+		Properties prop = loadFile();
+		System.setProperty("webdriver.firefox.driver", prop.getProperty("driver.ff"));
+		
 		WebDriver driver = new FirefoxDriver();
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get(prop.getProperty("url.flightPicker"));
 
 		introduceOrigin(driver);
 		introduceDestination(driver);
 
-		Thread.sleep(2000);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		includeAdults(driver,3);
 

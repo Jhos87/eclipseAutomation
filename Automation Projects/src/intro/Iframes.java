@@ -2,6 +2,7 @@ package intro;
 
 import java.time.Duration;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,19 +10,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
 
-public class Iframes {
+import HelperResources.ConfigReader;
 
-	public static void main(String[] args) {
+public class Iframes extends ConfigReader{
+
+	@Test
+	public static void testFour() {
 		// TODO Auto-generated method
 
-		System.setProperty("webdriver.firefox.driver", "C:\\Users\\Jhos\\Downloads\\geckodriver-v0.33.0-win-aarch64\\geckodriver.exec");
+		Properties prop = loadFile();
+		System.setProperty("webdriver.firefox.driver", prop.getProperty("driver.ff"));
 		
 		WebDriver driver = new FirefoxDriver();
-		
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-		driver.get("https://jqueryui.com/droppable/");
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get(prop.getProperty("url.iframe"));
 
 		System.out.println(driver.findElements(By.tagName("iframe")).size());
 

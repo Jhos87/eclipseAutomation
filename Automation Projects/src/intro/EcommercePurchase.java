@@ -2,6 +2,7 @@ package intro;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -14,15 +15,22 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class EcommercePurchase {
+import HelperResources.ConfigReader;
+
+public class EcommercePurchase extends ConfigReader {
 	
+    public static void main(String[] args) {
+        testOne();
+    }
+    
 	@Test
 	private static void testOne() {
-		System.setProperty("webdriver.firefox.driver", "C:\\Users\\Jhos\\Downloads\\geckodriver-v0.33.0-win-aarch64\\geckodriver.exec");
+		Properties prop = loadFile();
+		System.setProperty("webdriver.firefox.driver", prop.getProperty("driver.ff"));
 		
 		WebDriver driver = new FirefoxDriver();
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.get("https://rahulshettyacademy.com/loginpagePractise/");
+		driver.get(prop.getProperty("url.ecommPurchase"));
 		
 		WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(5));
 		

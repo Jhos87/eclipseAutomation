@@ -3,6 +3,7 @@ package intro;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -10,17 +11,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
-public class ShoppingCart {
-	public static void main(String[] args) throws InterruptedException {
+import HelperResources.ConfigReader;
+
+public class ShoppingCart extends ConfigReader{
+	
+	@Test
+	public static void testSix() {
 		// TODO Auto-generated method stub
 
-		System.setProperty("webdriver.firefox.driver", "C:\\Users\\Jhos\\Downloads\\geckodriver-v0.33.0-win-aarch64\\geckodriver.exec");
-
+		Properties prop = loadFile();
+		System.setProperty("webdriver.firefox.driver", prop.getProperty("driver.ff"));
+		
 		WebDriver driver = new FirefoxDriver();
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get(prop.getProperty("url.shoppingCart"));
+		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
 		List<WebElement> we = driver.findElements(By.xpath("//h4[@class=\"product-name\"]"));
 		String[] things = {"Cucumber - 1 Kg","Brocolli - 1 Kg","Beetroot - 1 Kg"};
 		List listThings = Arrays.asList(things);

@@ -2,24 +2,32 @@ package intro;
 
 import java.time.Duration;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Test;
 
-public class IterateWindows {
+import HelperResources.ConfigReader;
 
-	public static void main(String[] args) {
+public class IterateWindows extends ConfigReader {
+
+    public static void main(String[] args) {
+        testFive();
+    }
+	
+	@Test
+	public static void testFive() {
 		// TODO Auto-generated method
 
-		System.setProperty("webdriver.firefox.driver", "C:\\Users\\Jhos\\Downloads\\geckodriver-v0.33.0-win-aarch64\\geckodriver.exec");
+		Properties prop = loadFile();
+		System.setProperty("webdriver.firefox.driver", prop.getProperty("driver.ff"));
 		
 		WebDriver driver = new FirefoxDriver();
-		
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-		driver.get("https://rahulshettyacademy.com/loginpagePractise/#");
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get(prop.getProperty("url.iterateWindow"));
 
 		driver.findElement(By.cssSelector(".blinkingText")).click();
 
@@ -32,7 +40,6 @@ public class IterateWindows {
 		String childId = it.next();
 
 		driver.switchTo().window(childId);
-
 
 		System.out.println(driver.findElement(By.cssSelector(".im-para.red")).getText());
 

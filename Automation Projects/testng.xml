@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Summary">
-  <test thread-count="5" name="Test">
+<suite name="Summary" parallel="tests" thread-count="6">
+  <test thread-count="6" name="Test">  
+	 <classes>
+		<class name="intro.EcommercePurchase"/>
+		<class name="intro.FillinForm"/>
+		<class name="intro.FlightPicker"/>
+		<class name="intro.Iframes"/>
+		<class name="intro.IterateWindows"/>
+		<class name="intro.ShoppingCart"/>
+		<class name="intro.SummarizeColumnsRows"/>
+		<class name="intro.SummarizeMatrix"/>
+		<class name="intro.WindowIterator"/>
+	 </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -3,6 +3,7 @@ package intro;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,20 +13,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
-public class SummarizeMatrix {
+import HelperResources.ConfigReader;
 
-	public static void main(String[] args) {
+public class SummarizeMatrix extends ConfigReader {
+
+	@Test
+	public static void testEight() {
 		// TODO Auto-generated method
 
-		System.setProperty("webdriver.firefox.driver", "C:\\Users\\Jhos\\Downloads\\geckodriver-v0.33.0-win-aarch64\\geckodriver.exec");
+		Properties prop = loadFile();
+		System.setProperty("webdriver.firefox.driver", prop.getProperty("driver.ff"));
 		
 		WebDriver driver = new FirefoxDriver();
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get(prop.getProperty("url.summarize"));
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
-		
 		scrollDown(driver);
 		
 		List<WebElement> we = driver.findElements(By.cssSelector(".tableFixHead td:nth-child(4)"));
